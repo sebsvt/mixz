@@ -1,0 +1,1451 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise For You ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #ed91aa;
+  --pink-dark: #d96f91;
+  --pink-light: #fce5eb;
+  --cream: #fffaf6;
+  --text: #70515a;
+  --muted: #a98b92;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Prompt', sans-serif;
+  color: var(--text);
+  background: #fff7f7;
+  overflow-x: hidden;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.screen {
+  min-height: 100svh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 20px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 15%, #ffe3eb 0, transparent 42%),
+    radial-gradient(ellipse at 85% 85%, #fbe8e0 0, transparent 45%),
+    #fff9f7;
+}
+
+.screen.active {
+  display: flex;
+  animation: pageEnter .8s ease both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content {
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+h1, h2, h3 {
+  font-family: 'Itim', cursive;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(38px, 8vw, 52px);
+  color: #c96e88;
+  margin: 12px 0;
+  line-height: 1.2;
+}
+
+h2 {
+  color: #c96e88;
+}
+
+p {
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.eyebrow {
+  color: #d38a9d;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.hero-icon {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  font-size: 51px;
+  background: linear-gradient(145deg,#fff,#ffe6ed);
+  box-shadow: 0 12px 35px #df9aab33;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+.panel {
+  background: rgba(255,255,255,.82);
+  border: 1px solid #f7e3e7;
+  border-radius: 28px;
+  padding: 30px 24px;
+  box-shadow: 0 15px 45px #c98b9a14;
+  backdrop-filter: blur(10px);
+  margin-top: 25px;
+}
+
+.btn {
+  border: none;
+  padding: 14px 25px;
+  border-radius: 50px;
+  color: white;
+  background: linear-gradient(135deg,#eea0b3,#d97794);
+  box-shadow: 0 8px 20px #d98ca044;
+  font-size: 15px;
+  transition: .3s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px #d98ca055;
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+.btn-outline {
+  background: white;
+  color: #ca7891;
+  border: 1px solid #f1c8d3;
+  box-shadow: none;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 15px 17px;
+  border: 1px solid #efd5dc;
+  border-radius: 15px;
+  outline: none;
+  background: #fffdfd;
+  color: var(--text);
+  font-size: 15px;
+  transition: .3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #e99aaf;
+  box-shadow: 0 0 0 4px #fce5eb;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.error {
+  min-height: 25px;
+  color: #d66e8c;
+  font-size: 13px;
+}
+
+.small {
+  color: #b69aa2;
+  font-size: 12px;
+}
+
+/* Progress */
+
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 25px;
+}
+
+.progress span {
+  width: 24px;
+  height: 4px;
+  border-radius: 10px;
+  background: #f2dce2;
+}
+
+.progress span.active {
+  width: 42px;
+  background: #df8da5;
+}
+
+/* Quiz */
+
+.choices {
+  display: grid;
+  gap: 11px;
+  margin-top: 22px;
+}
+
+.choice {
+  background: #fff9fa;
+  border: 1px solid #f3dce3;
+  border-radius: 15px;
+  padding: 15px;
+  color: #85616c;
+  font-size: 15px;
+  transition: .25s;
+}
+
+.choice:hover {
+  background: #fff0f4;
+  border-color: #e8a2b5;
+  transform: translateY(-2px);
+}
+
+/* Floating decoration */
+
+.float {
+  position: fixed;
+  bottom: -40px;
+  z-index: 1;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+  opacity: .6;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-115vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Cake */
+
+.cake-stage {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cake {
+  position: relative;
+  width: 210px;
+  height: 120px;
+  margin-top: 65px;
+  filter: drop-shadow(0 9px 7px #c8799022);
+}
+
+.cake-body {
+  position: absolute;
+  width: 210px;
+  height: 100px;
+  top: 15px;
+  background: linear-gradient(90deg,#ee9caf,#ffd5dd,#ee9caf);
+  border: 4px solid white;
+  border-radius: 8px 8px 20px 20px;
+  z-index: 2;
+}
+
+.cake-top {
+  position: absolute;
+  width: 210px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffe2e8;
+  border: 4px solid white;
+  top: -8px;
+  z-index: 3;
+}
+
+.cake-top::after {
+  content: "🍓  ♡  🍓";
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  font-size: 19px;
+}
+
+.cake-body::after {
+  content: "♡   ♡   ♡";
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 22px;
+}
+
+.plate {
+  position: absolute;
+  width: 255px;
+  height: 17px;
+  bottom: 18px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px #b47b8a22;
+}
+
+.candle {
+  position: absolute;
+  left: 98px;
+  top: -65px;
+  height: 65px;
+  width: 14px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    45deg,#fff 0 5px,#ed91aa 5px 10px
+  );
+  z-index: 5;
+}
+
+.flame {
+  position: absolute;
+  left: 95px;
+  top: -96px;
+  width: 21px;
+  height: 30px;
+  background: radial-gradient(ellipse at 50% 75%,#fff8ad,#ffb43f 55%,#ff825b);
+  border-radius: 50% 50% 40% 40%;
+  transform-origin: bottom center;
+  animation: flicker .45s infinite alternate;
+  z-index: 6;
+}
+
+.flame.off {
+  display: none;
+}
+
+@keyframes flicker {
+  to { transform: rotate(7deg) scale(1.1); }
+}
+
+.blow-area {
+  margin-top: 8px;
+}
+
+/* Wish reveal */
+
+.wish-result {
+  display: none;
+  margin: 15px 0;
+  padding: 15px;
+  background: #fff3f6;
+  border-radius: 15px;
+  color: #c56f8a;
+  font-size: 14px;
+}
+
+/* Letter section */
+
+#page4 {
+  align-items: flex-start;
+  padding-top: 55px;
+  padding-bottom: 80px;
+}
+
+.letter-content {
+  max-width: 620px;
+  width: 100%;
+  margin: auto;
+}
+
+.envelope-wrap {
+  width: 100%;
+  max-width: 360px;
+  margin: 35px auto 20px;
+  height: 190px;
+  position: relative;
+  perspective: 900px;
+  transition: .6s;
+}
+
+.envelope {
+  width: 100%;
+  height: 165px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #e9a0b2;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px #c987982c;
+  z-index: 2;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-left: 180px solid #f3b9c7;
+  border-right: 180px solid #e88da5;
+  border-top: 85px solid transparent;
+  border-bottom: 80px solid #dc819b;
+  border-radius: 8px;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f4bac9;
+  clip-path: polygon(0 0,100% 0,50% 65%);
+  transform-origin: top center;
+  transition: transform .8s ease;
+  z-index: 4;
+}
+
+.envelope-heart {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 29px;
+  z-index: 5;
+  transition: .4s;
+}
+
+.envelope-wrap.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-wrap.open .envelope-heart {
+  opacity: 0;
+}
+
+/* Large letter card */
+
+.letter-card {
+  display: none;
+  width: 100%;
+  max-width: 560px;
+  margin: 25px auto 0;
+  background:
+    radial-gradient(circle at 100% 0%,#fff0f3 0,transparent 28%),
+    #fffefa;
+  border: 1px solid #f1e4dc;
+  border-radius: 7px;
+  padding: clamp(25px,6vw,55px);
+  text-align: left;
+  box-shadow: 0 20px 60px #aa78851c;
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-card.show {
+  display: block;
+  animation: cardOpen 1.1s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes cardOpen {
+  from {
+    opacity: 0;
+    transform: translateY(65px) scale(.93);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.letter-card::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #f7e4e5;
+}
+
+.letter-inner {
+  position: relative;
+  z-index: 1;
+  padding-left: 10px;
+}
+
+.letter-top {
+  text-align: center;
+  border-bottom: 1px solid #f1dce1;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.letter-top .flower {
+  font-size: 27px;
+}
+
+.letter-top h2 {
+  font-size: 33px;
+  margin: 10px 0 3px;
+  font-family: 'Itim', cursive;
+}
+
+.letter-date {
+  color: #b99ba2;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.letter-message {
+  font-family: 'Itim', cursive;
+  font-size: 19px;
+  line-height: 2;
+  white-space: pre-wrap;
+  color: #775761;
+  min-height: 120px;
+  overflow-wrap: anywhere;
+}
+
+.letter-sign {
+  text-align: right;
+  margin-top: 30px;
+  color: #c77991;
+  font-family: 'Itim', cursive;
+  font-size: 21px;
+}
+
+.letter-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #d999aa;
+  font-size: 12px;
+}
+
+.open-hint {
+  margin: 20px auto;
+}
+
+/* Confetti */
+
+.confetti {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  font-size: 20px;
+  animation: confettiFall 3.5s ease-in forwards;
+}
+
+@keyframes confettiFall {
+  from {
+    transform: translateY(-30px) rotate(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(105vh) rotate(600deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width:480px) {
+  .screen {
+    padding: 25px 16px;
+  }
+
+  .panel {
+    padding: 25px 18px;
+  }
+
+  #page4 {
+    padding-top: 40px;
+  }
+
+  .letter-card {
+    padding: 30px 23px;
+  }
+
+  .letter-message {
+    font-size: 18px;
+  }
+
+  .envelope-wrap {
+    max-width: 300px;
+  }
+
+  .envelope::before {
+    border-left-width: 150px;
+    border-right-width: 150px;
+  }
+}
+
+/* =================================
+   PINK ROMANTIC NUMERIC KEYPAD
+================================= */
+
+.keypad-panel {
+  max-width: 340px;
+  margin: 25px auto;
+  padding: 28px 24px;
+  background: rgba(255,255,255,.88);
+  border: 1px solid #f3dce3;
+  border-radius: 28px;
+  box-shadow: 0 18px 45px #c98b9a20;
+}
+
+.keypad-display {
+  height: 66px;
+  background: linear-gradient(135deg,#f5b2c2,#e991aa);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  letter-spacing: 5px;
+  margin-bottom: 23px;
+  box-shadow: inset 0 2px 5px #ffffff55,
+              0 5px 15px #e991aa33;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 13px;
+  max-width: 255px;
+  margin: auto;
+}
+
+.key {
+  width: 65px;
+  height: 58px;
+  margin: auto;
+  border-radius: 50%;
+  border: 1px solid #f5d2dc;
+  background: linear-gradient(145deg,#fff4f7,#fce3eb);
+  color: #c96e88;
+  font-family: 'Itim', cursive;
+  font-size: 24px;
+  box-shadow: 0 5px 12px #d68ba322;
+  transition: .2s;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.key:hover {
+  background: #f5c3d0;
+  color: white;
+  transform: scale(1.07);
+}
+
+.key:active {
+  transform: scale(.91);
+}
+
+.key.special {
+  background: #fff0f4;
+  font-size: 17px;
+}
+
+.keypad-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.keypad-actions button {
+  flex: 1;
+}
+
+.keypad-hint {
+  font-size: 12px;
+  color: #b99ba2;
+  margin-top: 18px;
+}
+
+.keypad-error {
+  min-height: 24px;
+  color: #d96f91;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.keypad-display.shake {
+  animation: shake .35s;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+}
+
+@media(max-width:380px) {
+  .keypad-panel {
+    padding: 23px 15px;
+  }
+
+  .key {
+    width: 58px;
+    height: 54px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<section class="screen active" id="page1">
+<div class="content">
+
+  <div class="progress">
+    <span class="active"></span>
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="hero-icon">🎀</div>
+
+  <div class="eyebrow"></div>
+
+  <h1>ที่รักวันนี้วันอะไรเอ่ย?</h1>
+  <h1>ช่วยเค้าคิดหน่อยย</h1>
+
+  <p class="subtitle">
+    วันนี้มีอะไรพิเศษหรือเปล่าน้า?
+  </p>
+
+  <div class="panel">
+
+    <b>วันนี้วันอะไรน้าา ? 🐷</b>
+
+    <div class="choices">
+      <button class="choice" onclick="checkAnswer(false)">
+        วันอังคาร ☁️
+      </button>
+
+      <button class="choice" onclick="checkAnswer(true)">
+        วันเกิดของมุอุ๊ดด 🎂
+      </button>
+
+      <button class="choice" onclick="checkAnswer(false)">
+        วันเข้าพรรษา 🌸
+      </button>
+    </div>
+
+    <p class="error" id="quizMsg"></p>
+
+  </div>
+
+  <p class="small">♡</p>
+
+</div>
+</section>
+
+
+
+<!-- PAGE 2: ANNIVERSARY KEYPAD -->
+
+<section class="screen" id="page2">
+
+  <div class="content">
+
+    <div class="progress">
+      <span class="active"></span>
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="hero-icon">💌</div>
+
+    <div class="eyebrow">
+     
+    </div>
+
+    <h1>ใส่วันครบรอบ<br>
+      ของเราทั้งคู่เลยย</h1>
+
+    <p class="subtitle">
+      วันครบรอบของเราคือวันไหนเอ่ย?<br>
+      ใส่รหัสลับเร็ววว ♡
+    </p>
+
+    <div class="keypad-panel">
+
+      <!-- PASSWORD DISPLAY -->
+
+      <div class="keypad-display" id="keypadDisplay">
+        DD / MM / YYYY
+      </div>
+
+      <!-- NUMBER PAD -->
+
+      <div class="keypad-grid">
+
+        <button class="key" onclick="keypadPress('1')">1</button>
+        <button class="key" onclick="keypadPress('2')">2</button>
+        <button class="key" onclick="keypadPress('3')">3</button>
+
+        <button class="key" onclick="keypadPress('4')">4</button>
+        <button class="key" onclick="keypadPress('5')">5</button>
+        <button class="key" onclick="keypadPress('6')">6</button>
+
+        <button class="key" onclick="keypadPress('7')">7</button>
+        <button class="key" onclick="keypadPress('8')">8</button>
+        <button class="key" onclick="keypadPress('9')">9</button>
+
+        <button class="key special"
+          onclick="keypadClear()">C</button>
+
+        <button class="key" onclick="keypadPress('0')">0</button>
+
+        <button class="key special"
+          onclick="keypadDelete()">⌫</button>
+
+      </div>
+
+      <div class="keypad-actions">
+
+        <button class="btn btn-outline"
+          onclick="keypadClear()">
+          Clear
+        </button>
+
+        <button class="btn"
+          onclick="keypadSubmit()">
+          Unlock ♡
+        </button>
+
+      </div>
+
+      <p class="keypad-error" id="keypadError"></p>
+
+      <p class="keypad-hint">
+        ใส่วันครบรอบได้เลยย · ♡
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 3 -->
+
+<section class="screen" id="page3">
+<div class="content">
+
+  <div class="progress">
+    <span class="active"></span>
+    <span class="active"></span>
+    <span class="active"></span>
+    <span></span>
+  </div>
+
+  <div class="eyebrow"></div>
+
+  <h1>Happy Birthday!</h1>
+
+  <p class="subtitle">
+    สุขสันต์วันเกิดนะะ<br>
+    หมูอู๊ดดของเค้าาาา ♡
+  </p>
+
+  <div class="panel">
+
+    <div class="cake-stage">
+
+      <div class="plate"></div>
+
+      <div class="cake">
+
+        <div class="cake-body"></div>
+        <div class="cake-top"></div>
+        <div class="candle"></div>
+        <div class="flame" id="flame"></div>
+
+      </div>
+
+    </div>
+
+    <b>มีอะไรที่อยากอธิฐานก่อนเป่าเค้กมั้ย</b>
+
+    <div class="small ">
+      อธิษฐานสิ่งที่อยากได้เเล้วพิมใส่ได้เลยนะ
+    </div>
+
+    <textarea
+      id="wish"
+      rows="3"
+      placeholder="ปีนี้ฉันอยากให้..."
+    ></textarea>
+
+    <div class="blow-area">
+
+      <button class="btn btn-block" id="blowBtn" onclick="blowCandle()">
+        เป่าเทียนเลย!
+      </button>
+
+      <p id="blowMsg" class="small"></p>
+
+      <div id="wishResult" class="wish-result"></div>
+
+      <button
+        class="btn btn-block"
+        id="nextBtn"
+        onclick="goPage(4)"
+        style="display:none"
+      >
+        ไปเปิดจดหมายกัน 💌
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<!-- PAGE 4 -->
+
+<section class="screen" id="page4">
+<div class="letter-content">
+
+  <div class="progress">
+    <span class="active"></span>
+    <span class="active"></span>
+    <span class="active"></span>
+    <span class="active"></span>
+  </div>
+
+  <div class="hero-icon">💗</div>
+
+  <div class="eyebrow"></div>
+
+  <h1>เค้ามีอะไรจะบอกอะเปิดเร็วว</h1>
+
+  <p class="subtitle">
+    <br>
+    ลองเปิดอ่านดูนะ ♡
+  </p>
+
+  <!-- Envelope -->
+
+  <div class="envelope-wrap" id="envelopeWrap">
+
+    <div class="envelope">
+
+      <div class="envelope-flap"></div>
+
+      <div class="envelope-heart">♡</div>
+
+    </div>
+
+  </div>
+
+  <div class="open-hint" id="openHint">
+    <button class="btn" id="openBtn" onclick="openLetter()">
+      เปิดจดหมายของฉัน 💌
+    </button>
+  </div>
+
+  <!-- BIG LETTER -->
+
+  <article class="letter-card" id="letterCard">
+
+    <div class="letter-inner">
+
+      <div class="letter-top">
+
+        <div class="flower">🌷 ✿ 🌷</div>
+
+        <h2>Happy Birthday</h2>
+
+        <div class="letter-date">
+          สุขสันต์วันเกิดนะคับแฟนน
+        </div>
+
+      </div>
+
+      <div
+        class="letter-message"
+        id="letterMessage"
+      ></div>
+
+      <div class="letter-sign">
+        จาก,<br>
+        <span id="senderDisplay">ไวไว</span>
+      </div>
+
+      <div class="letter-footer">
+        ขอบคุณเธอที่อ่านจนจบนะ
+      </div>
+
+    </div>
+
+  </article>
+
+  <p class="small" style="margin-top:35px">
+    
+  </p>
+
+</div>
+</section>
+
+
+<script>
+
+/* ===================================
+   PERSONAL SETTINGS
+=================================== */
+
+const CONFIG = {
+
+  anniversaryPassword: "17/11/2003",
+
+  loverName: "ที่รัก",
+
+  senderName: "เค้า",
+
+  birthdayMessage:
+`สุขสันต์วันเกิดนะ ที่รัก 🎂♡
+
+ก่อนอื่นก็ขอบคุณเธอมากๆเลยนะ
+ที่อยู่กับเค้ามาตลอดปีนี้โตขึ้นอีกปีแล้ว
+อยากขอโทษที่บางครั้งทําตัวไม่น่ารัก
+หัวร้อนนิสัยไม่ดีในบางครั้ง เเต่เค้ารักเธอมากๆเลยนะ
+
+ขอบคุณที่เข้ามาในชีวิตเค้านะ
+เค้ามีความสุขมากๆที่ได้ใช้เวลากับเธอ
+ถึงเค้าจะไม่ค่อยมีเวลาเลย เเต่เค้าคิดถึงเธอตลอดนะ
+แม้วันที่เราได้คุยกันน้อย เค้าก็ยังรักเธอไม่เปลี่ยน
+
+ขอให้วันเกิดปีนี้เป็นปีที่ดีสําหรับเธอนะคนเก่งของเค้า
+เค้าอยากอยู่กับเธอไปนานๆเลยถึงเธอจะชอบเป็นปีศาจหมูก็เถอะ
+
+ขอให้เธอมีสุขภาพร่างกายแข็งเเรง หมํ่าๆเยอะๆ อู๊ดๆ
+ไม่ป่วยบ่อยย ไม่ร้องไห้เยอะ ไม่เสียใจอีก
+
+สุดท้ายนี้ อยากให้รู้ไว้ว่า
+เธอรักเธอมากกกๆเลยนะเธอจะมีเค้าอยู่ข้างๆเสมอเลย
+
+รักเธอที่สุดๆๆๆๆๆๆๆเลยยยนะ ❤️`
+
+};
+
+
+/* ===================================
+   NAVIGATION
+=================================== */
+
+function goPage(number) {
+
+  document.querySelectorAll(".screen")
+    .forEach(page => page.classList.remove("active"));
+
+  document.getElementById("page" + number)
+    .classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  if(number === 4) {
+
+    const message = CONFIG.birthdayMessage
+      .replaceAll("ที่รัก", CONFIG.loverName);
+
+    document.getElementById("letterMessage")
+      .textContent = message;
+
+    document.getElementById("senderDisplay")
+      .textContent = CONFIG.senderName + " ♡";
+
+  }
+
+}
+
+
+/* ===================================
+   PAGE 1 - QUIZ
+=================================== */
+
+function checkAnswer(correct) {
+
+  const msg = document.getElementById("quizMsg");
+
+  if(correct) {
+
+    msg.textContent = "เก่งที่สุดเลย! คำตอบถูกต้อง ♡";
+
+    confetti();
+
+    setTimeout(() => goPage(2), 1200);
+
+  } else {
+
+    msg.textContent = "จําไม่ได้จริงๆอะ 🥺";
+
+  }
+
+}
+
+
+/* ===================================
+   PAGE 2 - PASSWORD
+=================================== */
+
+
+/* ===================================
+   PAGE 2 - NUMERIC KEYPAD
+=================================== */
+
+// PASSWORD: 15/8/2569
+
+const CORRECT_PASSWORD = "15082569";
+
+let enteredPassword = "";
+
+function updateKeypadDisplay() {
+
+  const display = document.getElementById("keypadDisplay");
+
+  const day = enteredPassword.slice(0,2);
+  const month = enteredPassword.slice(2,4);
+  const year = enteredPassword.slice(4,8);
+
+  const mask = value =>
+    "●".repeat(value.length);
+
+  const dayDisplay = day.length ? mask(day) : "DD";
+  const monthDisplay = month.length ? mask(month) : "MM";
+  const yearDisplay = year.length ? mask(year) : "YYYY";
+
+  display.textContent =
+    `${dayDisplay} / ${monthDisplay} / ${yearDisplay}`;
+
+}
+
+function keypadPress(number) {
+
+  if(enteredPassword.length >= 8) return;
+
+  enteredPassword += number;
+
+  updateKeypadDisplay();
+
+  document.getElementById("keypadError")
+    .textContent = "";
+
+}
+
+function keypadDelete() {
+
+  enteredPassword = enteredPassword.slice(0,-1);
+
+  updateKeypadDisplay();
+
+}
+
+function keypadClear() {
+
+  enteredPassword = "";
+
+  updateKeypadDisplay();
+
+  document.getElementById("keypadError")
+    .textContent = "";
+
+}
+
+function keypadSubmit() {
+
+  const display = document.getElementById("keypadDisplay");
+
+  const error = document.getElementById("keypadError");
+
+  if(enteredPassword.length !== 8) {
+
+    error.textContent =
+      "ใส่รหัสให้ครบ 8 หลักก่อนนะะ ♡";
+
+    display.classList.remove("shake");
+
+    void display.offsetWidth;
+
+    display.classList.add("shake");
+
+    return;
+
+  }
+
+  if(enteredPassword === CORRECT_PASSWORD) {
+
+    error.textContent = "เก่งมากกไปเป่าเค้กกัน ♡";
+
+    confetti();
+
+    setTimeout(() => {
+
+      keypadClear();
+
+      goPage(3);
+
+    }, 1200);
+
+  } else {
+
+    error.textContent =
+      "รหัสยังไม่ถูกน้า เค้างอนเเล้วว 🥺";
+
+    display.classList.remove("shake");
+
+    void display.offsetWidth;
+
+    display.classList.add("shake");
+
+    setTimeout(() => {
+
+      keypadClear();
+
+    }, 700);
+
+  }
+
+}
+
+// รองรับการกดตัวเลขจากคีย์บอร์ดด้วย
+
+document.addEventListener("keydown", function(event) {
+
+  const page2 = document.getElementById("page2");
+
+  if(!page2.classList.contains("active")) return;
+
+  if(/^[0-9]$/.test(event.key)) {
+
+    keypadPress(event.key);
+
+  } else if(event.key === "Backspace") {
+
+    keypadDelete();
+
+  } else if(event.key === "Escape") {
+
+    keypadClear();
+
+  } else if(event.key === "Enter") {
+
+    keypadSubmit();
+
+  }
+
+});
+
+
+/* ===================================
+   PAGE 3 - CAKE
+=================================== */
+
+function blowCandle() {
+
+  const wish = document.getElementById("wish").value.trim();
+
+  if(!wish) {
+
+    document.getElementById("blowMsg").textContent =
+      "อย่าลืมเขียนคำอธิษฐานก่อนนะ ♡";
+
+    return;
+
+  }
+
+  document.getElementById("flame")
+    .classList.add("off");
+
+  document.getElementById("blowBtn")
+    .disabled = true;
+
+  document.getElementById("blowBtn")
+    .textContent = "ขอให้ทุกคำอธิษฐานเป็นจริงนะ ♡";
+
+  document.getElementById("blowMsg")
+    .textContent = "";
+
+  document.getElementById("wishResult")
+    .textContent = "คำอธิษฐานของเธอ: " + wish;
+
+  document.getElementById("wishResult")
+    .style.display = "block";
+
+  document.getElementById("nextBtn")
+    .style.display = "block";
+
+  confetti();
+
+}
+
+
+/* ===================================
+   PAGE 4 - LETTER
+=================================== */
+
+let letterOpened = false;
+
+function openLetter() {
+
+  if(letterOpened) return;
+
+  letterOpened = true;
+
+  const envelope = document.getElementById("envelopeWrap");
+
+  envelope.classList.add("open");
+
+  document.getElementById("openBtn")
+    .style.display = "none";
+
+  document.getElementById("openHint")
+    .style.display = "none";
+
+  setTimeout(() => {
+
+    const card = document.getElementById("letterCard");
+
+    card.classList.add("show");
+
+    confetti();
+
+    setTimeout(() => {
+
+      card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    }, 500);
+
+  }, 550);
+
+}
+
+
+/* ===================================
+   FLOATING DECORATIONS
+=================================== */
+
+function floatingHearts() {
+
+  const symbols = [
+    "♡","💗","💕","🌸","✿","✨"
+  ];
+
+  const item = document.createElement("div");
+
+  item.className = "float";
+
+  item.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  item.style.left = Math.random() * 100 + "vw";
+
+  item.style.fontSize =
+    (14 + Math.random() * 20) + "px";
+
+  item.style.animationDuration =
+    (6 + Math.random() * 5) + "s";
+
+  document.body.appendChild(item);
+
+  setTimeout(() => item.remove(), 12000);
+
+}
+
+setInterval(floatingHearts, 1100);
+
+
+/* ===================================
+   CONFETTI
+=================================== */
+
+function confetti() {
+
+  const symbols = ["♡","💗","✨","🌸","💕"];
+
+  for(let i = 0; i < 45; i++) {
+
+    const item = document.createElement("div");
+
+    item.className = "confetti";
+
+    item.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    item.style.left = Math.random() * 100 + "vw";
+
+    item.style.top = "-30px";
+
+    item.style.animationDelay =
+      Math.random() * .8 + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(() => item.remove(), 5000);
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
